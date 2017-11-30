@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+              xmlns:local="clr-namespace:Lebenslauf;assembly=Lebenslauf"
+             x:Class="Lebenslauf.LebenslaufList" Title="Lebenslauf Liste">
+ <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:ConverterBase64ImageSource x:Key="Imgconvert" />
+        </ResourceDictionary>
+        </ContentPage.Resources>
+  <ScrollView>
+    <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
+      <StackLayout.BackgroundColor>
+        <OnPlatform x:TypeArguments="Color"
+                                Android="#320019"
+                            
+                                iOS="#320019"></OnPlatform>
+      </StackLayout.BackgroundColor>
+
+     
+  <ListView x:Name="lstData" ItemSelected="OnSelection" >
+    <ListView.ItemTemplate>
+      <DataTemplate>
+        <ViewCell>
+         
+            <ViewCell.ContextActions>
+              <MenuItem Clicked="OnDelete" CommandParameter="{Binding CVName}" Text="Löschen" IsDestructive="True"/>
+            </ViewCell.ContextActions>
+          <ViewCell.View>
+            <StackLayout Padding="20,0,20,0"
+                         Orientation="Horizontal"
+                         HorizontalOptions="FillAndExpand">
+
+              <Label Text="{Binding CVName}" VerticalTextAlignment="Center" HorizontalOptions="StartAndExpand" TextColor="#ff8700" FontSize="18"/>
+             <!-- <Bildvorschau wegen Programmabsturz an mehreren Stellen in iOS-Version deaktiviert A.S.  x:Name="PerImg" Source="{Binding Personimage,Converter={StaticResource Imgconvert}}"  HorizontalOptions="End" /> -->
+                    
+
+            </StackLayout>
+          </ViewCell.View>
+        </ViewCell>
+      </DataTemplate>
+    </ListView.ItemTemplate>
+  </ListView>
+      </StackLayout>
+    </ScrollView>
+</ContentPage>

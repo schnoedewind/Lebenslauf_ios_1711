@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Lebenslauf;assembly=Lebenslauf"
+			 x:Class="Lebenslauf.MasterPage"
+			 Padding="0,40,0,0"
+			 Icon="hamburger.png"
+			 Title="Personal Organiser">
+	<ContentPage.Content>
+		<StackLayout VerticalOptions="FillAndExpand">
+      <StackLayout.BackgroundColor>
+        <OnPlatform x:TypeArguments="Color"
+                                Android="#320019"
+                            
+                                iOS="#320019"></OnPlatform>
+      </StackLayout.BackgroundColor>
+
+      <ListView x:Name="listView" VerticalOptions="FillAndExpand" SeparatorVisibility="None">
+				<ListView.ItemTemplate>
+					<DataTemplate>
+						<!--ImageCell Text="{Binding Title}" ImageSource="{Binding IconSource}" /-->
+            <ImageCell Text="{Binding Title}"  />
+					</DataTemplate>
+				</ListView.ItemTemplate>
+			</ListView>
+		</StackLayout>
+    
+	</ContentPage.Content>
+</ContentPage>

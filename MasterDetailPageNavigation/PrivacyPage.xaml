@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Lebenslauf;assembly=Lebenslauf"
+             x:Class="Lebenslauf.PrivacyPage" Title="Datenschutz">
+  <ContentPage.Resources>
+    <ResourceDictionary>
+      <Style x:Key="plainButton" TargetType="Button">
+        <Setter Property="BackgroundColor" Value="#320019"/>
+        <Setter Property="TextColor" Value="#ff8700" />
+        <Setter Property="BorderRadius" Value="0"/>
+        <Setter Property="FontSize" Value="16" />
+      </Style>
+
+    </ResourceDictionary>
+  </ContentPage.Resources>
+  <ScrollView>
+    <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
+      <StackLayout.BackgroundColor>
+        <OnPlatform x:TypeArguments="Color"
+                                Android="#320019"
+                            
+                                iOS="#320019"></OnPlatform>
+      </StackLayout.BackgroundColor>
+
+      <StackLayout VerticalOptions="CenterAndExpand" Padding="10,0,10,0">
+        <Label FontSize="18" Text="{Binding HelpText}" TextColor="#ff8700" HorizontalOptions="Start" VerticalOptions="Start"/>
+      </StackLayout>
+
+      <StackLayout Orientation="Horizontal" VerticalOptions="End">
+        <!-- bottom controls -->
+        <Grid x:Name="controlGrid" RowSpacing="1" ColumnSpacing="1">
+          <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+          </Grid.RowDefinitions>
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+          </Grid.ColumnDefinitions>
+        </Grid>
+
+        <Button  Grid.Row="1" Grid.Column="2" x:Name="Nex" HorizontalOptions="CenterAndExpand" Image="Del.png" Clicked="Back_Click" Style="{StaticResource plainButton}" />
+
+      </StackLayout>
+    </StackLayout>
+
+  </ScrollView>
+</ContentPage>

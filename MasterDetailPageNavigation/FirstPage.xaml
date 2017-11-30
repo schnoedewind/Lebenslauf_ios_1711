@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Lebenslauf;assembly=Lebenslauf"
+			 x:Class="Lebenslauf.FirstPage" Title="{Binding MainLabel}">
+  <ContentPage.Resources>
+    <ResourceDictionary>
+      <Style x:Key="plainButton" TargetType="Button">
+        <Setter Property="BackgroundColor" Value="#320019"/>
+        <Setter Property="TextColor" Value="#ff8700" />
+        <Setter Property="BorderRadius" Value="10"/>
+        <Setter Property="FontSize" Value="16" />
+
+      </Style>
+
+    </ResourceDictionary>
+
+  </ContentPage.Resources>
+  <ScrollView>
+    <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
+      <StackLayout.BackgroundColor>
+        <OnPlatform x:TypeArguments="Color"
+                                Android="#320019"
+                            
+                                iOS="#320019"></OnPlatform>
+      </StackLayout.BackgroundColor>
+
+      <StackLayout VerticalOptions="CenterAndExpand" Padding="10,0,10,0">
+
+        <Image IsVisible="true">
+          <Image.Source>
+            <OnPlatform x:TypeArguments="ImageSource">
+              <OnPlatform.iOS>
+                <FileImageSource File="A1.jpg"/>
+              </OnPlatform.iOS>
+              <OnPlatform.Android>
+                <FileImageSource File="A1.jpg"/>
+              </OnPlatform.Android>
+            </OnPlatform>
+          </Image.Source>
+        </Image>
+
+
+      </StackLayout>
+      <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
+        <!-- bottom controls -->
+        <Grid x:Name="controlGrid" RowSpacing="1" ColumnSpacing="1">
+          <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+          </Grid.RowDefinitions>
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+
+          </Grid.ColumnDefinitions>
+        </Grid>
+        <!--ImageButton  Grid.Row="0" Grid.Column="0" Source="Next.png" BorderColor="#ff8700"  BorderWidth="1" WidthRequest="220" HorizontalOptions="CenterAndExpand" Style="{StaticResource plainButton}" Clicked="Next_Click"/-->
+        <Button Text = "{Binding Label1}" Grid.Row="0" Grid.Column="0" x:Name="Prv"  BorderColor="#ff8700"  BorderWidth="1" WidthRequest="220" HorizontalOptions="CenterAndExpand"  Clicked="Create_Click"
+         Style="{StaticResource plainButton}" />
+        <Button Text = "{Binding Label2}" Grid.Row="1" Grid.Column="0" x:Name="Sav"  BorderColor="#ff8700"  BorderWidth="1" WidthRequest="220" HorizontalOptions="CenterAndExpand"  Clicked="Edit_Click"
+         Style="{StaticResource plainButton}" />
+        <Button Text = "{Binding Label3}" Grid.Row="2" Grid.Column="0" x:Name="Nex"  BorderColor="#ff8700"  BorderWidth="1" WidthRequest="220" HorizontalOptions="CenterAndExpand" Clicked="Set_Click"
+        Style="{StaticResource plainButton}" />
+
+
+      </StackLayout>
+    </StackLayout>
+
+  </ScrollView>
+</ContentPage>

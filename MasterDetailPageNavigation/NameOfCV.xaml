@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Lebenslauf;assembly=Lebenslauf"
+             x:Class="Lebenslauf.NameOfCV" Title="{Binding MainLabel}">
+   <ContentPage.Resources>
+    <ResourceDictionary>
+      <Style x:Key="plainButton" TargetType="Button">
+        <Setter Property="BackgroundColor" Value="#320019"/>
+        <Setter Property="TextColor" Value="#ff8700" />
+        <Setter Property="BorderRadius" Value="0"/>
+        <Setter Property="FontSize" Value="12" />
+      </Style>
+
+    </ResourceDictionary>
+  </ContentPage.Resources>
+  <ScrollView>
+  <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
+    <StackLayout.BackgroundColor>
+      <OnPlatform x:TypeArguments="Color"
+                              Android="#320019"
+                            
+                              iOS="#320019"></OnPlatform>
+    </StackLayout.BackgroundColor>
+
+        <StackLayout VerticalOptions="CenterAndExpand" Padding="10,0,10,0">
+    
+      <Image IsVisible="true">
+        <Image.Source>
+          <OnPlatform x:TypeArguments="ImageSource">
+            <OnPlatform.iOS>
+              <FileImageSource File="A1.jpg"/>
+            </OnPlatform.iOS>
+            <OnPlatform.Android>
+              <FileImageSource File="A1.jpg"/>
+            </OnPlatform.Android>
+          </OnPlatform>
+        </Image.Source>
+      </Image>
+    </StackLayout>
+    
+    <StackLayout  VerticalOptions="CenterAndExpand">
+        <Label FontSize="14" Text="{Binding Label1}" TextColor="#ff8700" HorizontalOptions="Center" VerticalOptions="Center"  />
+        
+      </StackLayout>
+    <StackLayout VerticalOptions="CenterAndExpand" Padding="25,0,25,0">
+    <Entry x:Name="NameCV"  HorizontalOptions="FillAndExpand"  TextColor="#8f8f8f" BackgroundColor="#320019" />
+    </StackLayout>
+    <StackLayout Orientation="Horizontal" VerticalOptions="End">
+      <!-- bottom controls -->
+      <Grid x:Name="controlGrid" RowSpacing="1" ColumnSpacing="1">
+        <Grid.RowDefinitions>
+          <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="*" />
+          <ColumnDefinition Width="*" />
+          <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+      </Grid>
+      <!--Button Text = "Vorhierige" Grid.Row="1" Grid.Column="0" x:Name="Prv"  HorizontalOptions="CenterAndExpand"
+       Style="{StaticResource plainButton}" /-->
+      <Button  Grid.Row="1" Grid.Column="0" x:Name="Prv"  HorizontalOptions="CenterAndExpand"  Image="Prev.png" Clicked="Prev_Click" Style="{StaticResource plainButton}" />
+      <Button Grid.Row="1" Grid.Column="1" x:Name="Sav" HorizontalOptions="CenterAndExpand" Image="Save.png"
+       Style="{StaticResource plainButton}" />
+      <Button  Grid.Row="1" Grid.Column="2" x:Name="Nex" HorizontalOptions="CenterAndExpand" Image="Next.png" Clicked="Next_Click" Style="{StaticResource plainButton}" />
+      <!--  <Button Text="Save" x:Name="Nex" HorizontalOptions="CenterAndExpand" /> -->
+
+    </StackLayout>
+  </StackLayout>
+
+    </ScrollView>
+</ContentPage>

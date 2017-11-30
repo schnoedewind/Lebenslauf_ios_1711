@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Lebenslauf;assembly=Lebenslauf"
+             x:Class="Lebenslauf.PersonalInfo2" Title="{Binding MainLabel}">
+
+  <ContentPage.Resources>
+    <ResourceDictionary>
+      <Style x:Key="plainButton" TargetType="Button">
+        <Setter Property="BackgroundColor" Value="#320019"/>
+        <Setter Property="TextColor" Value="#ff8700" />
+        <Setter Property="BorderRadius" Value="0"/>
+        <Setter Property="FontSize" Value="12" />
+      </Style>
+
+    </ResourceDictionary>
+  </ContentPage.Resources>
+  <ScrollView>
+    <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
+      <StackLayout.BackgroundColor>
+        <OnPlatform x:TypeArguments="Color"
+                                Android="#320019"
+                            
+                                iOS="#320019"></OnPlatform>
+      </StackLayout.BackgroundColor>
+     
+      <StackLayout VerticalOptions="CenterAndExpand" Padding="10,0,10,0">
+     
+        <StackLayout Orientation="Horizontal">
+          <Label FontSize="14" Text="{Binding Label1}" TextColor="#ff8700" HorizontalOptions="Start" VerticalOptions="Center" WidthRequest="100" />
+                    <Picker x:Name="FStand" TextColor="#8f8f8f" BackgroundColor="#320019" HorizontalOptions = "LayoutOptions.Start" WidthRequest="200">
+          <Picker.Items>
+            <x:String>ledig</x:String>
+            <x:String>verheiratet</x:String>
+            <x:String>geschieden</x:String>
+            <x:String>verwitwet</x:String>
+          </Picker.Items>
+            <Picker.SelectedIndex>0</Picker.SelectedIndex>
+          </Picker>
+        </StackLayout>
+
+        <StackLayout Orientation="Horizontal">
+          <Label FontSize="14" Text="{Binding Label2}" TextColor="#ff8700" HorizontalOptions="Start" VerticalOptions="Center" WidthRequest="100" />
+          <Entry x:Name="Staatsangehörigkeit" Text="" TextColor="#8f8f8f" BackgroundColor="#320019" HorizontalOptions = "LayoutOptions.Start" WidthRequest="200"/>
+        </StackLayout>
+
+        <StackLayout Orientation="Horizontal">
+          <Label FontSize="14" Text="{Binding Label3}" TextColor="#ff8700" HorizontalOptions="Start" VerticalOptions="Center" WidthRequest="100" />
+          <Entry x:Name="Kinder" TextColor="#8f8f8f" BackgroundColor="#320019" HorizontalOptions = "LayoutOptions.Start" WidthRequest="200"/>
+        </StackLayout>
+
+        <StackLayout Orientation="Horizontal">
+          <Label FontSize="14" Text="{Binding Label4}" TextColor="#ff8700" HorizontalOptions="Start" VerticalOptions="Start" WidthRequest="100" />
+                    <!-- Frame abgschaltet wegen iOS-Version, wenn Frame für Android benötigt wird, Frame versionsabhängig aktivieren A.S.: <Frame OutlineColor="#8f8f8f" HasShadow="False" VerticalOptions="FillAndExpand" HorizontalOptions = "LayoutOptions.Start" WidthRequest="200">   -->
+                    <Editor x:Name="Hobbies"  BackgroundColor="#320019" TextColor="#8f8f8f" VerticalOptions="Start" HeightRequest="150" HorizontalOptions = "LayoutOptions.Start" WidthRequest="200"/>
+                    <!-- </Frame>  -->
+        </StackLayout>
+      </StackLayout>
+
+      <StackLayout Orientation="Horizontal" VerticalOptions="End">
+        <!-- bottom controls -->
+        <Grid x:Name="controlGrid" RowSpacing="1" ColumnSpacing="1">
+          <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+          </Grid.RowDefinitions>
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+          </Grid.ColumnDefinitions>
+        </Grid>
+        <!--Button Text = "Vorhierige" Grid.Row="1" Grid.Column="0" x:Name="Prv"  HorizontalOptions="CenterAndExpand"
+       Style="{StaticResource plainButton}" /-->
+        <Button  Grid.Row="1" Grid.Column="0" x:Name="Prv"  HorizontalOptions="CenterAndExpand"  Image="Prev.png" Clicked="Prev_Click" Style="{StaticResource plainButton}" />
+        <Button Grid.Row="1" Grid.Column="1" x:Name="Sav" HorizontalOptions="CenterAndExpand" Image="Save.png"
+         Style="{StaticResource plainButton}" />
+        <Button  Grid.Row="1" Grid.Column="2" x:Name="Nex" HorizontalOptions="CenterAndExpand" Image="Next.png" Clicked="Next_Click" Style="{StaticResource plainButton}" />
+        <!--  <Button Text="Save" x:Name="Nex" HorizontalOptions="CenterAndExpand" /> -->
+
+      </StackLayout>
+    </StackLayout>
+  </ScrollView>
+
+</ContentPage>

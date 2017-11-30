@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Lebenslauf;assembly=Lebenslauf"
+             x:Class="Lebenslauf.AppFeedback" Title="{Binding MainLabel}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="plainButton" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="#320019"/>
+                <Setter Property="TextColor" Value="#ff8700" />
+                <Setter Property="BorderRadius" Value="0"/>
+                <Setter Property="FontSize" Value="16" />
+            </Style>
+
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ScrollView>
+        <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
+            <StackLayout.BackgroundColor>
+                <OnPlatform x:TypeArguments="Color"
+                                Android="#320019"
+                            
+                                iOS="#320019"></OnPlatform>
+            </StackLayout.BackgroundColor>
+
+            <StackLayout VerticalOptions="CenterAndExpand" Padding="10,0,10,0">
+
+                <Image IsVisible="true">
+                    <Image.Source>
+                        <OnPlatform x:TypeArguments="ImageSource">
+                            <OnPlatform.iOS>
+                                <FileImageSource File="feedback.jpg"/>
+                            </OnPlatform.iOS>
+                            <OnPlatform.Android>
+                                <FileImageSource File="feedback.jpg"/>
+                            </OnPlatform.Android>
+                        </OnPlatform>
+                    </Image.Source>
+                </Image>
+            </StackLayout>
+
+            <!--StackLayout Orientation="Horizontal">
+                <Label FontSize="14" Text="Name:" TextColor="#ff8700" HorizontalOptions="Start" VerticalOptions="Center" WidthRequest="100" />
+                <Entry x:Name="Name" HorizontalOptions="FillAndExpand" TextColor="#8f8f8f" BackgroundColor="#320019" />
+            </>
+            <StackLayout Orientation="Horizontal">
+                <Label FontSize="14" Text="Email:" TextColor="#ff8700" HorizontalOptions="Start" VerticalOptions="Center" WidthRequest="100" />
+                <Entry Keyboard="Email" x:Name="Email" HorizontalOptions="FillAndExpand" TextColor="#8f8f8f" BackgroundColor="#320019" />
+            </StackLayout-->
+            <StackLayout Orientation="Horizontal">
+                <Label FontSize="14" Text="Bemerkung:" TextColor="#ff8700" HorizontalOptions="Start" VerticalOptions="Start" WidthRequest="100" />
+                <Frame OutlineColor="#8f8f8f" HasShadow="True" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                    <Editor x:Name="EmailBody"  BackgroundColor="#320019" TextColor="#8f8f8f" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HeightRequest="200" />
+                </Frame>
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal" VerticalOptions="End">
+                <!-- bottom controls -->
+                <Grid x:Name="controlGrid" RowSpacing="1" ColumnSpacing="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                </Grid>
+               
+                <Button Grid.Row="1" Grid.Column="1" x:Name="SendEmail" HorizontalOptions="CenterAndExpand" Text="Senden" Clicked="OnButtonClicked" Style="{StaticResource plainButton}" />
+                
+
+            </StackLayout>
+        </StackLayout>
+
+    </ScrollView>
+</ContentPage>
