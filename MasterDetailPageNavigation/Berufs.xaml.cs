@@ -20,7 +20,7 @@ namespace Lebenslauf
         public int SumPages { get; private set; }
         public string imagePath { get; private set; }
 
-        BeruflicheTätigkeitTableItem dbRow;
+        BeruflicheTaetigkeitTableItem dbRow;
         DBStorageCV dbcv;
         //Farben festlegen A.S.
         Color EntryBackColor = Color.FromRgb(80, 20, 20);
@@ -38,7 +38,7 @@ namespace Lebenslauf
 
             dbcv = new DBStorageCV();
             int curCVID = dbcv.CurrentCVID;
-            var query = dbcv.dbCon.Table<BeruflicheTätigkeitTableItem>().Where(v => v.PersonendatenID == curCVID);
+            var query = dbcv.dbCon.Table<BeruflicheTaetigkeitTableItem>().Where(v => v.PersonendatenID == curCVID);
             SumPages = query.Count();
             MyCounter = MyCount;
             if (MyCount > 1)
@@ -79,11 +79,11 @@ namespace Lebenslauf
         void LoadData()
         {
             int curCVID = dbcv.CurrentCVID;
-            var query = dbcv.dbCon.Table<BeruflicheTätigkeitTableItem>().Where(v => v.PersonendatenID == curCVID & v.Index == MyCounter);
+            var query = dbcv.dbCon.Table<BeruflicheTaetigkeitTableItem>().Where(v => v.PersonendatenID == curCVID & v.Index == MyCounter);
             if (query.Count() > 0)
             {
                 dbRow = query.First();
-                Tätigkeit.Text = dbRow.Tätigkeit;
+                Tätigkeit.Text = dbRow.Taetigkeit;
                 BVonDate.Date = dbRow.Von;
                 BBisDate.Date = dbRow.Bis;
                 Arbeitgeber.Text = dbRow.Arbeitgeber;
@@ -101,19 +101,19 @@ namespace Lebenslauf
         void SaveData()
         {
             int curCVID = dbcv.CurrentCVID;
-            var query = dbcv.dbCon.Table<BeruflicheTätigkeitTableItem>().Where(v => v.PersonendatenID == curCVID & v.Index == MyCounter);
+            var query = dbcv.dbCon.Table<BeruflicheTaetigkeitTableItem>().Where(v => v.PersonendatenID == curCVID & v.Index == MyCounter);
             if (query.Count() > 0)
             { dbRow = query.First(); }
             else
             {
-                BeruflicheTätigkeitTableItem newDBRow = new BeruflicheTätigkeitTableItem();
+                BeruflicheTaetigkeitTableItem newDBRow = new BeruflicheTaetigkeitTableItem();
                 newDBRow.PersonendatenID = curCVID;
                 newDBRow.Index = MyCounter;
                 dbcv.dbCon.Insert(newDBRow);
                 dbRow = newDBRow;
                 SumPages += 1;
             };
-            dbRow.Tätigkeit = Tätigkeit.Text;
+            dbRow.Taetigkeit = Tätigkeit.Text;
             dbRow.Von = BVonDate.Date;
             dbRow.Bis = BBisDate.Date;
             dbRow.Arbeitgeber = Arbeitgeber.Text;
@@ -139,16 +139,16 @@ namespace Lebenslauf
             }
             SaveData();
             int NewCounter = MyCounter;
-            var query = dbcv.dbCon.Table<BeruflicheTätigkeitTableItem>().Where(v => v.PersonendatenID == dbcv.CurrentCVID & v.Index == MyCounter);
-            BeruflicheTätigkeitTableItem DelRow;
+            var query = dbcv.dbCon.Table<BeruflicheTaetigkeitTableItem>().Where(v => v.PersonendatenID == dbcv.CurrentCVID & v.Index == MyCounter);
+            BeruflicheTaetigkeitTableItem DelRow;
             DelRow = query.First();
-            dbcv.dbCon.Delete<BeruflicheTätigkeitTableItem>(DelRow.ID);
+            dbcv.dbCon.Delete<BeruflicheTaetigkeitTableItem>(DelRow.ID);
             if (SumPages > MyCounter)
             {
                 for (int i = 0; i < (SumPages - MyCounter); i++)
                 {
                     NewCounter += 1;
-                    var queryLoop = dbcv.dbCon.Table<BeruflicheTätigkeitTableItem>().Where(v => v.PersonendatenID == dbcv.CurrentCVID & v.Index == NewCounter);
+                    var queryLoop = dbcv.dbCon.Table<BeruflicheTaetigkeitTableItem>().Where(v => v.PersonendatenID == dbcv.CurrentCVID & v.Index == NewCounter);
                     DelRow = queryLoop.First();
                     DelRow.Index = NewCounter - 1;
                     dbcv.dbCon.Update(DelRow);

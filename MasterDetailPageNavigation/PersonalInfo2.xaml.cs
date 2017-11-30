@@ -72,7 +72,7 @@ namespace Lebenslauf
                 default: FStand.SelectedIndex = 0; break;
             }
             Kinder.Text = pdRow.Kinder;
-            Staatsangehörigkeit.Text = pdRow.Nationalität;
+            Staatsangehörigkeit.Text = pdRow.Nationalitaet;
             Hobbies.Text = pdRow.Hobbies;
         }
 
@@ -81,7 +81,7 @@ namespace Lebenslauf
         {
             pdRow = dbcv.dbCon.Get<PersonendatenTableItem>(dbcv.CurrentCVID);
             pdRow.Kinder = Kinder.Text;
-            pdRow.Nationalität = Staatsangehörigkeit.Text;
+            pdRow.Nationalitaet = Staatsangehörigkeit.Text;
             switch (FStand.SelectedIndex)
             {
                 case 0: pdRow.Familienstand = "ledig"; break;
