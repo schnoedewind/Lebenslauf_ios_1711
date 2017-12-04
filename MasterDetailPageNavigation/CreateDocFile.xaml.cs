@@ -1,7 +1,4 @@
-﻿using Java.Util;
-using SQLite;
-using Syncfusion.DocIO;
-using Syncfusion.DocIO.DLS;
+﻿using SQLite;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -563,193 +560,193 @@ namespace Lebenslauf
 
         public void FillDocIos ()
         {
-            string MyFile = "";
-            try
-            {
-                pdRow = dbcv.dbCon.Get<PersonendatenTableItem>(dbcv.CurrentCVID);
-            }
-            catch (Exception)
-            {
-                return;
-                //throw;
-            }
-            
-            MyFile = pdRow.NameCV + ".docx";
-            var query = dbcv.dbCon.Table<KontaktdatenTableItem>().Where(v => v.PersonendatenID == dbcv.CurrentCVID);
-            if (query.Count() > 0)
-            {
-                pdRowContact = query.First();
-            }
-       
-            var query1 = dbcv.dbCon.Table<ImagesTableItem>().Where(v => v.PersonendatenID == dbcv.CurrentCVID);
-            if (query1.Count() > 0)
-            {
-                pdRowImage = query1.First();
-            }
-
-            Assembly assembly = typeof(App).GetTypeInfo().Assembly;
-            
-            // Creating a new document.
-            //TEST
-            //string resname;           
-            //foreach (string resourceName in assembly.GetManifestResourceNames())
+            //string MyFile = "";
+            //try
             //{
-            //    resname = resourceName;
+            //    pdRow = dbcv.dbCon.Get<PersonendatenTableItem>(dbcv.CurrentCVID);
+            //}
+            //catch (Exception)
+            //{
+            //    return;
+            //    //throw;
+            //}
+            
+            //MyFile = pdRow.NameCV + ".docx";
+            //var query = dbcv.dbCon.Table<KontaktdatenTableItem>().Where(v => v.PersonendatenID == dbcv.CurrentCVID);
+            //if (query.Count() > 0)
+            //{
+            //    pdRowContact = query.First();
+            //}
+       
+            //var query1 = dbcv.dbCon.Table<ImagesTableItem>().Where(v => v.PersonendatenID == dbcv.CurrentCVID);
+            //if (query1.Count() > 0)
+            //{
+            //    pdRowImage = query1.First();
             //}
 
-            WordDocument document = new WordDocument();
-            Stream inputStream = assembly.GetManifestResourceStream("Lebenslauf.Templates.Lebenslauf02ios.docx");
-            //Open Template document
-            document.Open(inputStream, FormatType.Word2013);
-            inputStream.Dispose();
-
-            //Handler für das Foto (Android)
-            //document.MailMerge.MergeImageField += new MergeImageFieldEventHandler(Person_Photo);
-
-            //FOTO ios
-            Stream imageStream;
-            byte[] bytes = dbcv.LoadImageDataFromDB();
-            if (bytes != null)
-            {
-                var resizer = DependencyService.Get<IMediaService>();
-                var resizedBytes = resizer.ResizeImage(bytes, 137, 140); //Ein Fehler in ResizeImage vertauscht die Höhe und Breite des Bildes, dies wird beim Einfügen in das Word Dokument ausgeglichen
-                imageStream = new MemoryStream(resizedBytes);              
-            }
-            else
-            {
-                //Assembly assembly = GetType().Assembly();
-                imageStream = assembly.GetManifestResourceStream("Lebenslauf.Foto.png");
-            }
+            //Assembly assembly = typeof(App).GetTypeInfo().Assembly;
             
-            IWParagraph paragraph = document.LastParagraph;
+            //// Creating a new document.
+            ////TEST
+            ////string resname;           
+            ////foreach (string resourceName in assembly.GetManifestResourceNames())
+            ////{
+            ////    resname = resourceName;
+            ////}
+
+            //WordDocument document = new WordDocument();
+            //Stream inputStream = assembly.GetManifestResourceStream("Lebenslauf.Templates.Lebenslauf02ios.docx");
+            ////Open Template document
+            //document.Open(inputStream, FormatType.Word2013);
+            //inputStream.Dispose();
+
+            ////Handler für das Foto (Android)
+            ////document.MailMerge.MergeImageField += new MergeImageFieldEventHandler(Person_Photo);
+
+            ////FOTO ios
+            //Stream imageStream;
+            //byte[] bytes = dbcv.LoadImageDataFromDB();
+            //if (bytes != null)
+            //{
+            //    var resizer = DependencyService.Get<IMediaService>();
+            //    var resizedBytes = resizer.ResizeImage(bytes, 137, 140); //Ein Fehler in ResizeImage vertauscht die Höhe und Breite des Bildes, dies wird beim Einfügen in das Word Dokument ausgeglichen
+            //    imageStream = new MemoryStream(resizedBytes);              
+            //}
+            //else
+            //{
+            //    //Assembly assembly = GetType().Assembly();
+            //    imageStream = assembly.GetManifestResourceStream("Lebenslauf.Foto.png");
+            //}
             
-            WPicture picture = paragraph.AppendPicture(imageStream) as WPicture;                        
-
-            picture.TextWrappingStyle = TextWrappingStyle.InFrontOfText;
-
-            picture.VerticalOrigin = VerticalOrigin.Margin;          
-            picture.HorizontalOrigin = 0;
+            //IWParagraph paragraph = document.LastParagraph;
             
-            picture.VerticalPosition = 20;
-            picture.HorizontalPosition = 350;
+            //WPicture picture = paragraph.AppendPicture(imageStream) as WPicture;                        
 
-            // Korrektur eines Fehlers in der ResizeImage-Funktion. Bei dem Bild sind höhe und Breite vertauscht
-            float w = picture.Width;
-            float h = picture.Height;
-            picture.Width = h;
-            picture.Height = w;
-            
+            //picture.TextWrappingStyle = TextWrappingStyle.InFrontOfText;
 
-            //Skalieren
-            //float scale = (100 / h);
-            //picture.Width = w * scale;
-            //picture.Height = h * scale;
-
-
-            // w = picture.Width;
-            // h = picture.Height;
-
-
-            //picture.VerticalOrigin = VerticalOrigin.Margin;
+            //picture.VerticalOrigin = VerticalOrigin.Margin;          
             //picture.HorizontalOrigin = 0;
-            //picture.VerticalPosition = 90;
+            
+            //picture.VerticalPosition = 20;
             //picture.HorizontalPosition = 350;
-            //picture.Width = 137;
-            //picture.Height = 140;
 
-            //picture.WidthScale = 10;
-            //picture.HeightScale = 20;
+            //// Korrektur eines Fehlers in der ResizeImage-Funktion. Bei dem Bild sind höhe und Breite vertauscht
+            //float w = picture.Width;
+            //float h = picture.Height;
+            //picture.Width = h;
+            //picture.Height = w;
+            
 
-            //picture.Width = picture.Height;
-            //picture.Height = picture.Width;
-
-
-            //Arbeit
-            List<Works> workslist = GetWorksList();
-            MailMergeDataTable dtw = new MailMergeDataTable("Works", workslist);
-            document.MailMerge.ExecuteNestedGroup(dtw);
-
-            ////Ausbildung
-            List<Ausbildung> ausbildungslist = GetAusbildungList();
-            MailMergeDataTable dta = new MailMergeDataTable("Ausbildungs", ausbildungslist);
-            document.MailMerge.ExecuteNestedGroup(dta);
-
-            ////Schule
-            List<Schule> schulelist = GetSchuleList();
-            MailMergeDataTable dts = new MailMergeDataTable("Schools", schulelist);
-            document.MailMerge.ExecuteNestedGroup(dts);
-
-            ////Advances
-            List<Advance> advancelist = GetAdvanceList();
-            MailMergeDataTable dtad = new MailMergeDataTable("Advances", advancelist);
-            document.MailMerge.ExecuteNestedGroup(dtad);
-
-            ////Führerschein
-            List<Licence> licencelist = GetLicenceList();
-            MailMergeDataTable dtl = new MailMergeDataTable("DriveLicenses", licencelist);
-            document.MailMerge.ExecuteNestedGroup(dtl);
-
-            ////Sprachen
-            List<Sprache> sprachelist = GetLanguagesList();
-            MailMergeDataTable dtsp = new MailMergeDataTable("Languages", sprachelist);
-            document.MailMerge.ExecuteNestedGroup(dtsp);
-
-            //Sonstiges
-            List<Sonstiges> sonstigeslist = GetSonstigesList();
-            MailMergeDataTable dftxt = new MailMergeDataTable("FreiTexts", sonstigeslist);
-            document.MailMerge.ExecuteNestedGroup(dftxt);
-
-            //Computer
-            List<ComputerKentnisse> computerlist = GetComputerList();
-            MailMergeDataTable dcmp = new MailMergeDataTable("Computers", computerlist);
-            document.MailMerge.ExecuteNestedGroup(dcmp);
+            ////Skalieren
+            ////float scale = (100 / h);
+            ////picture.Width = w * scale;
+            ////picture.Height = h * scale;
 
 
-
-            //Personendaten
-            string gebdat;
-            gebdat = pdRow.GebDat.ToString(DATEFORMAT);
-            string[] fieldNames = new string[] { "FirstName", "Lastname", "Nation", "BirDate", "BirCountry", "BirCity", "Society", "Child", "Street", "ZipCode", "City", "Tel", "Email", "Hobby" };
-            string[] fieldValues = new string[] { pdRow.Vorname, pdRow.Nachname, pdRow.Nationalitaet, gebdat, pdRow.GebLand, pdRow.GebOrt, pdRow.Familienstand, pdRow.Kinder, NullToString(pdRowContact.Strasse), NullToString(pdRowContact.PLZ), NullToString(pdRowContact.Ort), NullToString(pdRowContact.Telefon), NullToString(pdRowContact.Email), pdRow.Hobbies };
-            document.MailMerge.Execute(fieldNames, fieldValues);
+            //// w = picture.Width;
+            //// h = picture.Height;
 
 
-            MemoryStream stream = new MemoryStream();
-            document.Save(stream, FormatType.Word2013);
-            document.Close();
-            //dbcv.dbCon.Close();
-            if (Device.OS == TargetPlatform.WinPhone || Device.OS == TargetPlatform.Windows)
-                Xamarin.Forms.DependencyService.Get<ISaveWindowsPhone>().Save(MyFile, "application/msword", stream);
-            else
-                Xamarin.Forms.DependencyService.Get<ISave>().Save(MyFile, "application/msword", stream);
+            ////picture.VerticalOrigin = VerticalOrigin.Margin;
+            ////picture.HorizontalOrigin = 0;
+            ////picture.VerticalPosition = 90;
+            ////picture.HorizontalPosition = 350;
+            ////picture.Width = 137;
+            ////picture.Height = 140;
+
+            ////picture.WidthScale = 10;
+            ////picture.HeightScale = 20;
+
+            ////picture.Width = picture.Height;
+            ////picture.Height = picture.Width;
+
+
+            ////Arbeit
+            //List<Works> workslist = GetWorksList();
+            //MailMergeDataTable dtw = new MailMergeDataTable("Works", workslist);
+            //document.MailMerge.ExecuteNestedGroup(dtw);
+
+            //////Ausbildung
+            //List<Ausbildung> ausbildungslist = GetAusbildungList();
+            //MailMergeDataTable dta = new MailMergeDataTable("Ausbildungs", ausbildungslist);
+            //document.MailMerge.ExecuteNestedGroup(dta);
+
+            //////Schule
+            //List<Schule> schulelist = GetSchuleList();
+            //MailMergeDataTable dts = new MailMergeDataTable("Schools", schulelist);
+            //document.MailMerge.ExecuteNestedGroup(dts);
+
+            //////Advances
+            //List<Advance> advancelist = GetAdvanceList();
+            //MailMergeDataTable dtad = new MailMergeDataTable("Advances", advancelist);
+            //document.MailMerge.ExecuteNestedGroup(dtad);
+
+            //////Führerschein
+            //List<Licence> licencelist = GetLicenceList();
+            //MailMergeDataTable dtl = new MailMergeDataTable("DriveLicenses", licencelist);
+            //document.MailMerge.ExecuteNestedGroup(dtl);
+
+            //////Sprachen
+            //List<Sprache> sprachelist = GetLanguagesList();
+            //MailMergeDataTable dtsp = new MailMergeDataTable("Languages", sprachelist);
+            //document.MailMerge.ExecuteNestedGroup(dtsp);
+
+            ////Sonstiges
+            //List<Sonstiges> sonstigeslist = GetSonstigesList();
+            //MailMergeDataTable dftxt = new MailMergeDataTable("FreiTexts", sonstigeslist);
+            //document.MailMerge.ExecuteNestedGroup(dftxt);
+
+            ////Computer
+            //List<ComputerKentnisse> computerlist = GetComputerList();
+            //MailMergeDataTable dcmp = new MailMergeDataTable("Computers", computerlist);
+            //document.MailMerge.ExecuteNestedGroup(dcmp);
+
+
+
+            ////Personendaten
+            //string gebdat;
+            //gebdat = pdRow.GebDat.ToString(DATEFORMAT);
+            //string[] fieldNames = new string[] { "FirstName", "Lastname", "Nation", "BirDate", "BirCountry", "BirCity", "Society", "Child", "Street", "ZipCode", "City", "Tel", "Email", "Hobby" };
+            //string[] fieldValues = new string[] { pdRow.Vorname, pdRow.Nachname, pdRow.Nationalitaet, gebdat, pdRow.GebLand, pdRow.GebOrt, pdRow.Familienstand, pdRow.Kinder, NullToString(pdRowContact.Strasse), NullToString(pdRowContact.PLZ), NullToString(pdRowContact.Ort), NullToString(pdRowContact.Telefon), NullToString(pdRowContact.Email), pdRow.Hobbies };
+            //document.MailMerge.Execute(fieldNames, fieldValues);
+
+
+            //MemoryStream stream = new MemoryStream();
+            //document.Save(stream, FormatType.Word2013);
+            //document.Close();
+            ////dbcv.dbCon.Close();
+            //if (Device.OS == TargetPlatform.WinPhone || Device.OS == TargetPlatform.Windows)
+            //    Xamarin.Forms.DependencyService.Get<ISaveWindowsPhone>().Save(MyFile, "application/msword", stream);
+            //else
+            //    Xamarin.Forms.DependencyService.Get<ISave>().Save(MyFile, "application/msword", stream);
         }
 
 
-        private void Person_Photo(object sender, MergeImageFieldEventArgs args)
+        //private void Person_Photo(object sender, MergeImageFieldEventArgs args)
 
-        {
+        //{
 
-            if (args.FieldName == "Foto")
-            {
-                byte[] bytes = dbcv.LoadImageDataFromDB();
-                if (bytes != null)
-                {
+        //    if (args.FieldName == "Foto")
+        //    {
+        //        byte[] bytes = dbcv.LoadImageDataFromDB();
+        //        if (bytes != null)
+        //        {
 
-                    var resizer = DependencyService.Get<IMediaService>();
-                    var resizedBytes = resizer.ResizeImage(bytes, 137, 140);
-                    Stream stream = new MemoryStream(resizedBytes);
-                    args.ImageStream = stream;
-                }
-                else
-                {
-                    Assembly assembly = GetType().Assembly();
-                    Stream imageStream = assembly.GetManifestResourceStream("Lebenslauf.Foto.png");
+        //            var resizer = DependencyService.Get<IMediaService>();
+        //            var resizedBytes = resizer.ResizeImage(bytes, 137, 140);
+        //            Stream stream = new MemoryStream(resizedBytes);
+        //            args.ImageStream = stream;
+        //        }
+        //        else
+        //        {
+        //            Assembly assembly = GetType().Assembly();
+        //            Stream imageStream = assembly.GetManifestResourceStream("Lebenslauf.Foto.png");
 
-                    args.ImageStream = imageStream;
-                }
+        //            args.ImageStream = imageStream;
+        //        }
 
-            }
-        }
+        //    }
+        //}
 
         private List<ExpandoObject> GetPerson()
 
