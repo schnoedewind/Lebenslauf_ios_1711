@@ -9,7 +9,7 @@ namespace Lebenslauf
         {
             InitializeComponent();
 
-            CrossShare.Current.Share("Leider, unser Link ist noch nicht Verfügbar", "Lebenslauf");
+           ' CrossShare.Current.Share("Leider, unser Link ist noch nicht Verfügbar", "Lebenslauf");
             MainPage mv = new MainPage();
             mv.Detail = new NavigationPage(new FirstPage());
             App.Current.MainPage = mv;
