@@ -114,6 +114,8 @@ namespace Lebenslauf
             // ((MasterDetailPage)Parent).IsPresented = false;
             //this.Navigation.PushAsync(new PersonalInfo());
 
+            //Nex.IsEnabled = false;
+
             SaveData();
             dbcv.dbCon.Close();
 
@@ -127,6 +129,9 @@ namespace Lebenslauf
             // new MainPage().Detail.Navigation.PushModalAsync(new PersonalInfo());
             // ((MasterDetailPage)Parent).IsPresented = false;
             //this.Navigation.PushAsync(new PersonalInfo());
+
+            //Prv.IsEnabled = false;
+            
 
             SaveData();
             dbcv.dbCon.Close();

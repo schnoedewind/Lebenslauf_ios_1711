@@ -8,7 +8,7 @@ namespace Lebenslauf
         public ShareApp()
         {
             InitializeComponent();
-           //Falscher Parametertyp, wie konnte das jemals kompiliert werden?
+           //Falscher Parametertyp
            // CrossShare.Current.Share("Leider, unser Link ist noch nicht Verfügbar", "Lebenslauf");
             MainPage mv = new MainPage();
             mv.Detail = new NavigationPage(new FirstPage());
