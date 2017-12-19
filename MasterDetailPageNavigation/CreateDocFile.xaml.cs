@@ -10,8 +10,8 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
-using Syncfusion.DocIO;
-using Syncfusion.DocIO.DLS;
+//using Syncfusion.DocIO;
+//using Syncfusion.DocIO.DLS;
 
 namespace Lebenslauf
 {
